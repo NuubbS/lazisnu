@@ -101,7 +101,7 @@
 									<h4>Uang Keluar & Masuk</h4>
 								</div>
 								<div class="card-body">
-									<canvas id="myChart" height="158"></canvas>
+									<canvas id="myChart" height="125"></canvas>
 								</div>
 							</div>
 						</div>
@@ -193,16 +193,40 @@
 								<div class="card-header">
 									<h4>Users</h4>
 									<div class="card-header-action">
-										<a href="#" class="btn btn-danger btn-icon icon-right">View All <i class="fas fa-chevron-right"></i></a>
+										<a href="#" class="btn btn-danger btn-icon icon-right">View Detail<i class="fas fa-chevron-right"></i></a>
 									</div>
 								</div>
 								<div class="card-body">
 									<div class="owl-carousel owl-theme" id="users-carousel">
 										<div>
 											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/default.png" class="img-fluid">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
 												<div class="user-details">
 													<div class="user-name">Arief Rahman Putera</div>
+													<div class="text-job text-muted">Web Developer</div>
+													<div class="user-cta">
+														<button class="btn btn-success follow-btn" data-follow-action="alert('user1 followed');" data-unfollow-action="alert('user1 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<div class="user-item">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
+												<div class="user-details">
+													<div class="user-name">M. Hamdan Yusuf</div>
+													<div class="text-job text-muted">Web Developer</div>
+													<div class="user-cta">
+														<button class="btn btn-success follow-btn" data-follow-action="alert('user2 followed');" data-unfollow-action="alert('user2 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<div class="user-item">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
+												<div class="user-details">
+													<div class="user-name">Admin</div>
 													<div class="text-job text-muted">Administrator</div>
 													<div class="user-cta">
 														<button class="btn btn-success follow-btn" data-follow-action="alert('user1 followed');" data-unfollow-action="alert('user1 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
@@ -212,9 +236,9 @@
 										</div>
 										<div>
 											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/avatar-2.png" class="img-fluid">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
 												<div class="user-details">
-													<div class="user-name">M. Hamdan Yusuf</div>
+													<div class="user-name">Member</div>
 													<div class="text-job text-muted">User</div>
 													<div class="user-cta">
 														<button class="btn btn-success follow-btn" data-follow-action="alert('user2 followed');" data-unfollow-action="alert('user2 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
@@ -229,7 +253,7 @@
 							</div>
 						</div>
 						<div class="col-lg-6">
-							<div class="card mt-4">
+							<div class="card card-warning">
 								<div class="card-header">
 									<h4>Authors</h4>
 								</div>
@@ -237,13 +261,13 @@
 									<div class="row">
 										<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
 											<div class="avatar-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/default.png" class="img-fluid" data-toggle="tooltip" title="Arief Rahman Putera">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid" data-toggle="tooltip" title="Arief Rahman Putera">
 												<div class="avatar-badge" title="Web Developer" data-toggle="tooltip"><i class="fas fa-wrench"></i></div>
 											</div>
 										</div>
 										<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
 											<div class="avatar-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/avatar-2.png" class="img-fluid" data-toggle="tooltip" title="M. Hamdan Yusuf">
+												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid" data-toggle="tooltip" title="M. Hamdan Yusuf">
 												<div class="avatar-badge" title="Web Developer" data-toggle="tooltip"><i class="fas fa-cog"></i></div>
 											</div>
 										</div>

@@ -8,15 +8,15 @@
     <!-- <title>Dashboard &mdash; Lazisnu</title> -->
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap/css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome/css/all.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/fontawesome/css/all.min.css">
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/summernote/css/summernote-bs4.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/OwlCarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/OwlCarousel/dist/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap-social.min.css">css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap-social.min.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
@@ -165,7 +165,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
+                            <a href="<?= base_url('profile'); ?>" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <a href="features-activities.html" class="dropdown-item has-icon">
@@ -175,7 +175,7 @@
                                 <i class="fas fa-cog"></i> Settings
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
+                            <a href="<?= base_url('auth'); ?>" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -192,16 +192,16 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="#"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+                        <li class="<?= $this->uri->segment(1) == 'dashboard' || '' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('dashboard') ?>"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
                         <li class="menu-header">Content</li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown <?= $this->uri->segment(1) == "munfiq" || $this->uri->segment(1) == "mustahiq" ? 'active' : '' ?>">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-hand-holding-usd"></i> <span>Infaq</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Munfiq</a></li>
-                                <li><a class="nav-link" href="#">Mustahiq</a></li>
+                                <li class="<?= $this->uri->segment(1) == 'munfiq' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('munfiq'); ?>">Munfiq</a></li>
+                                <li class="<?= $this->uri->segment(1) == 'mustahiq' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('mustahiq'); ?>">Mustahiq</a></li>
                             </ul>
                         </li>
-                        <li><a class="nav-link" href="#"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                        <li class="<?= $this->uri->segment(1) == 'profile' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('profile'); ?>"><i class="fas fa-user"></i> <span>Profile</span></a></li>
                         <li class="menu-header">Setting</li>
                         <li><a class="nav-link" href="#"><i class="fas fa-users-cog"></i> <span>User Account</span></a></li>
                     </ul>
