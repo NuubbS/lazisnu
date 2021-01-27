@@ -24,6 +24,20 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/components.css">
 
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+
 </head>
 
 <body>
@@ -119,6 +133,8 @@
             <script src="<?= base_url('assets/plugins/jquery/jquery-3.5.1.min.js'); ?>"></script>
             <script src="<?= base_url('assets/js/datatables.min.js') ?>"></script>
             <script src="<?= base_url('assets/plugins/loading-overlay/loadingoverlay.min.js') ?>"></script>
+            <script src="<?= base_url(''); ?>assets/plugins/popper.js"></script>
+            <script src="<?= base_url(''); ?>assets/plugins/tooltip.js"></script>
             <?= $contents; ?>
 
             <footer class="main-footer">
@@ -133,8 +149,6 @@
     </div>
 
     <!-- General JS Scripts -->
-    <script src="<?= base_url('assets/plugins/jquery/popper.min.js'); ?>"></script>
-    <script src="<?= base_url('assets/plugins/tooltip.js') ?>"></script>
     <script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/jquery/jquery.nicescroll.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/jquery/moment.js'); ?>"></script>
@@ -161,29 +175,10 @@
 
     <!-- ============ Search UI End ============= -->
     <script>
-        $(function() {
-            var table = $("#example1").DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "scrollX": true,
-            });
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-            });
-            $("#example1").attr('style', 'width: 100%');
-            $("tr").attr('style', 'width: 100%');
-            $('#filter-kategori').on('change', function() {
-                table.column(2).search(this.value).draw();
-            });
-            $('#filter-download').on('change', function() {
-                table.column(3).search(this.value).draw();
+        // tooltip
+        $(document).ready(function() {
+            $("body").tooltip({
+                selector: '[data-toggle=tooltip]'
             });
         });
     </script>
