@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bootstrap-social": "^5.1.1",
+    "pdfmake": "^0.1.70"
+  }
+}
