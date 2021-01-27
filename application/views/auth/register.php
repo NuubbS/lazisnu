@@ -23,7 +23,7 @@
 
 <body>
     <!-- alert -->
-    <div id="eror-register" data-er="<?= $this->session->flashdata('eror-register'); ?>"></div>
+    <div id="eror" data-er="<?= $this->session->flashdata('eror'); ?>"></div>
     <!-- alert -->
     <div id="app">
         <section class="section">
@@ -61,6 +61,9 @@
                                 <button type="submit" class="btn btn-primary btn-lg btn-block" name="regis">
                                     Register
                                 </button>
+                            </div>
+                            <div class="mt-2 text-center">
+                                Saya sudah memiliki akun ! <a href="<?= base_url('auth'); ?>">Login Now</a>
                             </div>
                         </form>
 
@@ -102,7 +105,7 @@
     <!-- Page Specific JS File -->
     <script>
         // alert
-        var er = $('#eror-register').data('er');
+        var er = $('#eror').data('er');
         if (er) {
             iziToast.warning({
                 title: 'Warning !',
@@ -110,6 +113,13 @@
                 position: 'topRight'
             });
         }
+
+        iziToast.info({
+            title: 'Information !',
+            message: 'Pastikan anda terkoneksi dengan internet saat melakukan registrasi !, \n Dikarenakan kami akan mengirimkan kode aktivasi ke email anda !',
+            position: 'topCenter',
+            timeout: 0
+        });
         // alert
     </script>
 </body>

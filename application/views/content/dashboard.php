@@ -189,67 +189,49 @@
 					<!-- end row -->
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="card card-danger">
+							<div class="card">
 								<div class="card-header">
-									<h4>Users</h4>
+									<h4 class="d-inline">User yang baru mendaftar</h4>
 									<div class="card-header-action">
-										<a href="#" class="btn btn-danger btn-icon icon-right">View Detail<i class="fas fa-chevron-right"></i></a>
+										<a href="#" class="btn btn-primary">View Detail</a>
 									</div>
 								</div>
 								<div class="card-body">
-									<div class="owl-carousel owl-theme" id="users-carousel">
-										<div>
-											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
-												<div class="user-details">
-													<div class="user-name">Arief Rahman Putera</div>
-													<div class="text-job text-muted">Web Developer</div>
-													<div class="user-cta">
-														<button class="btn btn-success follow-btn" data-follow-action="alert('user1 followed');" data-unfollow-action="alert('user1 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
-													</div>
-												</div>
+									<ul class="list-unstyled list-unstyled-border">
+										<li class="media">
+											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-4.png" alt="avatar">
+											<div class="media-body">
+												<div class="badge badge-pill badge-danger mb-1 float-right">Not Finished</div>
+												<h6 class="media-title"><a href="#">Redesign header</a></h6>
+												<div class="text-small text-muted">Alfa Zulkarnain <div class="bullet"></div> <span class="text-primary">Now</span></div>
 											</div>
-										</div>
-										<div>
-											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
-												<div class="user-details">
-													<div class="user-name">M. Hamdan Yusuf</div>
-													<div class="text-job text-muted">Web Developer</div>
-													<div class="user-cta">
-														<button class="btn btn-success follow-btn" data-follow-action="alert('user2 followed');" data-unfollow-action="alert('user2 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
-													</div>
-												</div>
+										</li>
+										<li class="media">
+											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-5.png" alt="avatar">
+											<div class="media-body">
+												<div class="badge badge-pill badge-primary mb-1 float-right">Completed</div>
+												<h6 class="media-title"><a href="#">Add a new component</a></h6>
+												<div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
 											</div>
-										</div>
-										<div>
-											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
-												<div class="user-details">
-													<div class="user-name">Admin</div>
-													<div class="text-job text-muted">Administrator</div>
-													<div class="user-cta">
-														<button class="btn btn-success follow-btn" data-follow-action="alert('user1 followed');" data-unfollow-action="alert('user1 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
-													</div>
-												</div>
+										</li>
+										<li class="media">
+											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-2.png" alt="avatar">
+											<div class="media-body">
+												<div class="badge badge-pill badge-warning mb-1 float-right">Progress</div>
+												<h6 class="media-title"><a href="#">Fix modal window</a></h6>
+												<div class="text-small text-muted">Ujang Maman <div class="bullet"></div> 8 Min</div>
 											</div>
-										</div>
-										<div>
-											<div class="user-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid">
-												<div class="user-details">
-													<div class="user-name">Member</div>
-													<div class="text-job text-muted">User</div>
-													<div class="user-cta">
-														<button class="btn btn-success follow-btn" data-follow-action="alert('user2 followed');" data-unfollow-action="alert('user2 unfollowed');"><i class="fab fa-whatsapp mr-2"></i>Chat</button>
-													</div>
-												</div>
+										</li>
+										<li class="media">
+											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-1.png" alt="avatar">
+											<div class="media-body">
+												<div class="badge badge-pill badge-danger mb-1 float-right">Not Finished</div>
+												<h6 class="media-title"><a href="#">Remove unwanted classes</a></h6>
+												<div class="text-small text-muted">Farhan A Mujib <div class="bullet"></div> 21 Min</div>
 											</div>
-										</div>
-									</div>
-									<!-- end owl-carousel -->
+										</li>
+									</ul>
 								</div>
-								<!-- end card body -->
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -259,18 +241,17 @@
 								</div>
 								<div class="card-body pb-0">
 									<div class="row">
-										<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
-											<div class="avatar-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid" data-toggle="tooltip" title="Arief Rahman Putera">
-												<div class="avatar-badge" title="Web Developer" data-toggle="tooltip"><i class="fas fa-wrench"></i></div>
+										<?php
+										foreach ($user->result() as $key => $data) { ?>
+											<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
+												<div class="avatar-item">
+													<?= date('d-M-Y H:i:s'); ?>
+													<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $data->gambar ?>" class="img-fluid" data-toggle="tooltip" title="<?= $data->nama; ?>">
+													<div class="avatar-badge" title="<?= $data->role_id; ?>" data-toggle="tooltip"><i class="fas fa-wrench"></i></div>
+													<?= date('d/M/yyyy H:i:s') - $data->date_created; ?>
+												</div>
 											</div>
-										</div>
-										<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
-											<div class="avatar-item">
-												<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="img-fluid" data-toggle="tooltip" title="M. Hamdan Yusuf">
-												<div class="avatar-badge" title="Web Developer" data-toggle="tooltip"><i class="fas fa-cog"></i></div>
-											</div>
-										</div>
+										<?php } ?>
 									</div>
 								</div>
 							</div>

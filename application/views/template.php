@@ -108,8 +108,8 @@
                     </ul>
                     <!-- sidebar menu -->
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                        <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                            <i class="fas fa-rocket"></i> Documentation
+                        <a href="https://github.com/NuubbS/lazisnu" class="btn btn-dark btn-lg btn-block btn-icon-split">
+                            <i class="fab fa-github"></i> View Source Code
                         </a>
                     </div>
                 </aside>

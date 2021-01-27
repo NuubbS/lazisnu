@@ -30,12 +30,19 @@ class Auth extends CI_Controller
                 'required' => 'Password harus diisi !'
             ]
         );
-        if ($this->form_validation->run() == false) {
+        $post = $this->input->post(null, True);
+        if (isset($post['login'])) {
+            if ($this->form_validation->run() == false) {
+                $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
+                $data['title'] = 'Login &mdash; Lazisnu';
+                $this->load->view('auth/login', $data);
+            } else {
+                // cek email dan password
+                $this->_login();
+            }
+        } else {
             $data['title'] = 'Login &mdash; Lazisnu';
             $this->load->view('auth/login', $data);
-        } else {
-            // cek email dan password
-            $this->_login();
         }
     }
 
@@ -55,10 +62,11 @@ class Auth extends CI_Controller
                 $this->session->set_userdata($params);
                 redirect('dashboard');
             } else {
+                $this->session->set_flashdata('eror', 'Akun belum melakukan aktifasi pada akun anda! \n Silahkan melaukan aktifasi dengan tautan yang sudah kami kirim ke email anda! ');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('eror-login', "Periksa kembali username dan password anda !");
+            $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
             redirect('auth');
         }
     }
@@ -88,25 +96,43 @@ class Auth extends CI_Controller
         $post = $this->input->post(null, True);
         if (isset($post['regis'])) {
             if ($this->form_validation->run() == false) {
-                $this->session->set_flashdata('eror-register', 'Ada kesalahan dalam input data, periksa kembali dengan teliti 
+                $this->session->set_flashdata('eror', 'Ada kesalahan dalam input data, periksa kembali dengan teliti 
             !');
                 $data['title'] = 'Register &mdash; Lazisnu';
                 $this->load->view('auth/register', $data);
             } else {
+                $email = $this->input->post('email', true);
                 $data = [
                     'nama' => htmlspecialchars($this->input->post('nama', true)),
-                    'email' => htmlspecialchars($this->input->post('email', true)),
-                    'gambar' => 'default_user.jpg',
+                    'email' => htmlspecialchars($email),
+                    'gambar' => 'default_user.png',
                     'password' => sha1($this->input->post('password')),
                     'role_id' => 3, //default member
-                    'status_id' => 1
+                    'status_id' => 0, //default off
+                    'keterangan_id' => 1
+
                 ];
+
+                // token untuk aktivasi
+                $token = base64_encode(random_bytes(32));
+                $user_token = [
+                    'email' => $email,
+                    'token' => $token,
+                    'date_created' => time()
+                ];
+
+                // proses add data
                 $this->user_m->add_user($data);
+                $this->db->insert('token', $user_token);
+
+                // kirim token ke email pendaftar
+                $this->_sendEmail($token, 'aktivasi');
+
                 if ($this->db->affected_rows() > 0) {
-                    $this->session->set_flashdata('sukses-register', "Registrasi Akun Berhasil ! \n Periksa akun Emal anda untuk melakukan verifikai !");
+                    $this->session->set_flashdata('sukses', "Registrasi Akun Berhasil ! \n Silahkan aktifasi akun anda dengan mengklik tautan yang kami kirim ke email anda ! !");
                     redirect('auth');
                 } else {
-                    $this->session->set_flashdata('eror-register', 'Ada kesalahan dalam input data, periksa kembali dengan teliti !');
+                    $this->session->set_flashdata('eror', 'Ada kesalahan, periksa kembali dengan teliti !');
                     $data['title'] = 'Register &mdash; Lazisnu';
                     $this->load->view('auth/register', $data);
                 }
@@ -114,6 +140,75 @@ class Auth extends CI_Controller
         } else {
             $data['title'] = 'Register &mdash; Lazisnu';
             $this->load->view('auth/register', $data);
+        }
+    }
+
+
+    private function _sendEmail($token, $type)
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'dancokbeud@gmail.com',
+            'smtp_pass' => 'dancokbeud123',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+
+        $this->email->from('dancokbeud@gmail.com', 'Lazisnu Kesamben');
+
+        // untuk verivikasi
+        if ($type == 'aktivasi') {
+            $this->email->to($this->input->post('email'));
+            $this->email->subject('Account Verivication');
+            $this->email->message('Click this link to verivy your account : <a href="' . base_url() . 'auth/verivy?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Activated</a>');
+        }
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo  $this->email->print_debugger();
+            die;
+        }
+    }
+
+    public function verivy()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+        if ($user) {
+            $user_token =
+                $this->db->get_where('token', ['token' => $token])->row_array();
+            if ($user_token) {
+                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                    $this->db->set('status_id', 1);
+                    $this->db->where('email', $email);
+                    $this->db->update('user');
+
+                    $this->db->delete('token', ['email' => $email]);
+                    $this->session->set_flashdata('sukses', "Aktivasi Akun Berhasil ! \n Silahkan Login unutk melanjutkan !");
+                    redirect('auth');
+                } else {
+                    $this->db->delete('user', ['email' => $email]);
+                    $this->db->delete('token', ['email' => $email]);
+                    $this->session->set_flashdata('eror', "Account activation failed");
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('eror', "Account activation failed");
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('eror', "Account activation failed");
+            redirect('auth');
         }
     }
 

@@ -21,7 +21,7 @@ class User_m extends CI_Model
     {
         $this->db->from('user');
         if ($id) {
-            $this->db->where('user_id', $id);
+            $this->db->where('role_id', $id);
         }
         $query = $this->db->get();
         return $query;

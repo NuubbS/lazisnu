@@ -21,7 +21,8 @@
 
 <body>
     <!-- alert -->
-    <div id="sukses-register" data-sr="<?= $this->session->flashdata('sukses-register'); ?>"></div>
+    <div id="sukses" data-sr="<?= $this->session->flashdata('sukses'); ?>"></div>
+    <div id="eror" data-el="<?= $this->session->flashdata('eror'); ?>"></div>
     <!-- alert -->
     <div id="app">
         <section class="section">
@@ -29,8 +30,8 @@
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                     <div class="p-4 m-3">
                         <img src="<?= base_url() ?>assets/img/logo/nucare.png" alt="logo" width="300" class="shadow-light mb-2 mt-2">
-                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Lazisnu Kesamben</span></h4>
-                        <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
+                        <h4 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">Lazisnu Kesamben</span></h4>
+                        <p class="text-muted">Sebelum anda mengakses aplikasi, anda harus login atau mendaftar jika anda belum mempunyai akun Lazisnu Kesamben.</p>
                         <form method="POST" action="<?= base_url('auth'); ?>">
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -50,12 +51,12 @@
                                 <a href="auth-forgot-password.html" class="float-left mt-3">
                                     Forgot Password?
                                 </a>
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" name="login" tabindex="4">
                                     Login
                                 </button>
                             </div>
 
-                            <div class="mt-5 text-center">
+                            <div class="mt-2 text-center">
                                 Don't have an account? <a href="<?= base_url('auth/register'); ?>">Create new one</a>
                             </div>
                         </form>
@@ -97,11 +98,19 @@
 
     <!-- Page Specific JS File -->
     <script>
-        var sr = $('#sukses-register').data('sr');
+        var sr = $('#sukses').data('sr');
         if (sr) {
             iziToast.success({
                 title: 'Caution !',
                 message: sr,
+                position: 'topRight'
+            });
+        }
+        var el = $('#eror').data('el');
+        if (el) {
+            iziToast.warning({
+                title: 'Login Gagal !',
+                message: el,
                 position: 'topRight'
             });
         }

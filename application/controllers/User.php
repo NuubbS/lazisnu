@@ -27,7 +27,7 @@ class User extends CI_Controller
         foreach ($m as $key => $value) {
             $act = '';
             $act .= sprintf('<button onclick="edit(%s)" class="btn btn-icon btn-sm btn-primary m-1" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="fas fa-user-edit"></i></button>', $value['user_id']);
-            $act .= sprintf('<button onclick="hapus(%s)" class="btn btn-icon btn-sm btn-danger m-1" data-toggle="tooltip" data-placement="top" title="Nonaktifkan User ?"><i class="fas fa-user-times"></button>', $value['user_id']);
+            $act .= sprintf('<button onclick="hapus(%s)" class="btn btn-icon btn-sm btn-info m-1" data-toggle="tooltip" data-placement="top" title="Detail User"><i class="fas fa-diagnoses"></button>', $value['user_id']);
             $m[$key]['as'] = $act;
             $m[$key]['user_id'] = $no;
             $no++;
