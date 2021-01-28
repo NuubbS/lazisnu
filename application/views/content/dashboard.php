@@ -191,45 +191,23 @@
 						<div class="col-lg-6">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="d-inline">User yang baru mendaftar</h4>
+									<h4 class="d-inline">User baru belum melakukan aktivasi</h4>
 									<div class="card-header-action">
 										<a href="#" class="btn btn-primary">View Detail</a>
 									</div>
 								</div>
 								<div class="card-body">
 									<ul class="list-unstyled list-unstyled-border">
-										<li class="media">
-											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-4.png" alt="avatar">
-											<div class="media-body">
-												<div class="badge badge-pill badge-danger mb-1 float-right">Not Finished</div>
-												<h6 class="media-title"><a href="#">Redesign header</a></h6>
-												<div class="text-small text-muted">Alfa Zulkarnain <div class="bullet"></div> <span class="text-primary">Now</span></div>
-											</div>
-										</li>
-										<li class="media">
-											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-5.png" alt="avatar">
-											<div class="media-body">
-												<div class="badge badge-pill badge-primary mb-1 float-right">Completed</div>
-												<h6 class="media-title"><a href="#">Add a new component</a></h6>
-												<div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
-											</div>
-										</li>
-										<li class="media">
-											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-2.png" alt="avatar">
-											<div class="media-body">
-												<div class="badge badge-pill badge-warning mb-1 float-right">Progress</div>
-												<h6 class="media-title"><a href="#">Fix modal window</a></h6>
-												<div class="text-small text-muted">Ujang Maman <div class="bullet"></div> 8 Min</div>
-											</div>
-										</li>
-										<li class="media">
-											<img class="mr-3 rounded-circle" width="50" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-1.png" alt="avatar">
-											<div class="media-body">
-												<div class="badge badge-pill badge-danger mb-1 float-right">Not Finished</div>
-												<h6 class="media-title"><a href="#">Remove unwanted classes</a></h6>
-												<div class="text-small text-muted">Farhan A Mujib <div class="bullet"></div> 21 Min</div>
-											</div>
-										</li>
+										<?php foreach ($user->result() as $key => $data) { ?>
+											<li class="media">
+												<img class="mr-3 rounded-circle" width="50" src="<?= base_url(); ?>assets/img/avatar/<?= $data->gambar; ?>" alt="avatar">
+												<div class="media-body">
+													<div class="badge badge-pill badge-danger mb-1 float-right"><?= $data->status; ?></div>
+													<h6 class="media-title"><a href="#"><?= $data->nama; ?></a></h6>
+													<div class="text-small text-muted"><?= $data->role; ?><div class="bullet"></div> <span class="text-primary"><?= $data->date_created; ?></span></div>
+												</div>
+											</li>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>
@@ -242,13 +220,11 @@
 								<div class="card-body pb-0">
 									<div class="row">
 										<?php
-										foreach ($user->result() as $key => $data) { ?>
+										foreach ($author->result() as $key => $data) { ?>
 											<div class="col-6 col-sm-3 col-lg-3 mb-4 mb-md-0">
 												<div class="avatar-item">
-													<?= date('d-M-Y H:i:s'); ?>
 													<img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $data->gambar ?>" class="img-fluid" data-toggle="tooltip" title="<?= $data->nama; ?>">
-													<div class="avatar-badge" title="<?= $data->role_id; ?>" data-toggle="tooltip"><i class="fas fa-wrench"></i></div>
-													<?= date('d/M/yyyy H:i:s') - $data->date_created; ?>
+													<div class="avatar-badge" title="<?= $data->role; ?>" data-toggle="tooltip"><i class="fas fa-wrench"></i></div>
 												</div>
 											</div>
 										<?php } ?>

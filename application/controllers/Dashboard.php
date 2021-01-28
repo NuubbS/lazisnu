@@ -13,8 +13,8 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$data['title'] = 'Dashboard &mdash; Lazisnu';
-		$id = 1;
-		$data['user'] = $this->user_m->get_data($id);
+		$data['user'] = $this->global_m->view_join_two('user', 'user_role', 'status', 'role_id', 'status_id', array('user.status_id' => 2), 'user_id', 'DESC', 1, 4);
+		$data['author'] = $this->global_m->view_join_two_nolimit('user', 'user_role', 'status', 'role_id', 'status_id', array('user.role_id' => 1));
 		$this->template->load('template', 'content/dashboard', $data);
 	}
 }

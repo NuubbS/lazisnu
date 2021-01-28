@@ -35,39 +35,48 @@ class Auth extends CI_Controller
             if ($this->form_validation->run() == false) {
                 $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
                 $data['title'] = 'Login &mdash; Lazisnu';
-                $this->load->view('auth/login', $data);
+                $this->template_auth->load('template_auth', 'auth/login', $data);
             } else {
                 // cek email dan password
                 $this->_login();
             }
         } else {
             $data['title'] = 'Login &mdash; Lazisnu';
-            $this->load->view('auth/login', $data);
+            $this->template_auth->load('template_auth', 'auth/login', $data);
         }
     }
 
     private function _login()
     {
         // post
-        $post = $this->input->post(null, true);
-        $query = $this->user_m->login($post);
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
-            $params = array(
-                'user_id' => $row->user_id,
-                'role_id' => $row->role_id
-            );
-            // cek aktifasi user
-            if ($row->status_id != 0) {
-                $this->session->set_userdata($params);
-                redirect('dashboard');
+
+        if (isset($_POST['login'])) {
+            $post = [
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password')
+            ];
+            $query = $this->user_m->login($post);
+            if ($query->num_rows() > 0) {
+                $row = $query->row();
+                // cek aktifasi user
+                if ($row->status_id == 0) {
+                    $this->session->set_flashdata('eror', 'Akun belum melakukan aktifasi pada akun anda! \n Silahkan melaukan aktifasi dengan tautan yang sudah kami kirim ke email anda! ');
+                    redirect('auth');
+                } else {
+                    $params = array(
+                        'user_id' => $row->user_id,
+                        'role_id' => $row->role_id
+                    );
+                    $this->session->set_userdata($params);
+                    redirect('dashboard');
+                }
             } else {
-                $this->session->set_flashdata('eror', 'Akun belum melakukan aktifasi pada akun anda! \n Silahkan melaukan aktifasi dengan tautan yang sudah kami kirim ke email anda! ');
+                $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
-            redirect('auth');
+            $data['title'] = 'Login &mdash; Lazisnu';
+            $this->template_auth->load('template_auth', 'auth/login', $data);
         }
     }
 
@@ -93,57 +102,51 @@ class Auth extends CI_Controller
         );
         $this->form_validation->set_rules('password2', 'password2', 'required|trim|matches[password]');
         // proses
-        $post = $this->input->post(null, True);
-        if (isset($post['regis'])) {
-            if ($this->form_validation->run() == false) {
-                $this->session->set_flashdata('eror', 'Ada kesalahan dalam input data, periksa kembali dengan teliti 
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('eror', 'Ada kesalahan dalam input data, periksa kembali dengan teliti 
             !');
-                $data['title'] = 'Register &mdash; Lazisnu';
-                $this->load->view('auth/register', $data);
-            } else {
-                $email = $this->input->post('email', true);
-                $data = [
-                    'nama' => htmlspecialchars($this->input->post('nama', true)),
-                    'email' => htmlspecialchars($email),
-                    'gambar' => 'default_user.png',
-                    'password' => sha1($this->input->post('password')),
-                    'role_id' => 3, //default member
-                    'status_id' => 0, //default off
-                    'keterangan_id' => 1
-
-                ];
-
-                // token untuk aktivasi
-                $token = base64_encode(random_bytes(32));
-                $user_token = [
-                    'email' => $email,
-                    'token' => $token,
-                    'date_created' => time()
-                ];
-
-                // proses add data
-                $this->user_m->add_user($data);
-                $this->db->insert('token', $user_token);
-
-                // kirim token ke email pendaftar
-                $this->_sendEmail($token, 'aktivasi');
-
-                if ($this->db->affected_rows() > 0) {
-                    $this->session->set_flashdata('sukses', "Registrasi Akun Berhasil ! \n Silahkan aktifasi akun anda dengan mengklik tautan yang kami kirim ke email anda ! !");
-                    redirect('auth');
-                } else {
-                    $this->session->set_flashdata('eror', 'Ada kesalahan, periksa kembali dengan teliti !');
-                    $data['title'] = 'Register &mdash; Lazisnu';
-                    $this->load->view('auth/register', $data);
-                }
-            }
-        } else {
             $data['title'] = 'Register &mdash; Lazisnu';
-            $this->load->view('auth/register', $data);
+            $this->template_auth->load('template_auth', 'auth/register', $data);
+        } else {
+            $email = $this->input->post('email', true);
+            $data = [
+                'nama' => htmlspecialchars($this->input->post('nama', true)),
+                'email' => htmlspecialchars($email),
+                'gambar' => 'default_user.png',
+                'password' => sha1($this->input->post('password')),
+                'role_id' => 3, //default member
+                'status_id' => 0, //default off
+                'keterangan_id' => 1
+
+            ];
+
+            // token untuk aktivasi
+            $token = base64_encode(random_bytes(32));
+            $user_token = [
+                'email' => $email,
+                'token' => $token,
+                'date_created' => time()
+            ];
+
+            // proses add data
+            $this->user_m->add_user($data);
+            $this->db->insert('token', $user_token);
+
+            // kirim token ke email pendaftar
+            $this->_sendEmail($token, 'aktivasi');
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('sukses', "Registrasi Akun Berhasil ! \n Silahkan aktifasi akun anda dengan mengklik tautan yang kami kirim ke email anda ! !");
+                redirect('auth');
+            } else {
+                $this->session->set_flashdata('eror', 'Ada kesalahan, periksa kembali dengan teliti !');
+                $data['title'] = 'Register &mdash; Lazisnu';
+                $this->template_auth->load('template_auth', 'auth/register', $data);
+            }
         }
     }
 
-
+    // fungsi untuk kirim email
     private function _sendEmail($token, $type)
     {
         $config = [
@@ -212,6 +215,11 @@ class Auth extends CI_Controller
         }
     }
 
+    public function forgot()
+    {
+        $data['title'] = 'Forgot Password &mdash; Lazisnu';
+        $this->template_auth->load('template_auth', 'auth/forgot', $data);
+    }
     public function logout()
     {
         $params = array('user_id', 'role_id');
