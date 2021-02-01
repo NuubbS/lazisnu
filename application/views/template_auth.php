@@ -28,6 +28,7 @@
     <div id="eror" data-er="<?= $this->session->flashdata('eror'); ?>"></div>
     <div id="sukses" data-sr="<?= $this->session->flashdata('sukses'); ?>"></div>
     <div id="eror" data-el="<?= $this->session->flashdata('eror'); ?>"></div>
+    <div id="warning" data-warning="<?= $this->session->flashdata('warning'); ?>"></div>
     <!-- alert -->
 
     <?= $content_auth; ?>
@@ -78,10 +79,18 @@
                 position: 'topRight'
             });
         }
+        var warning = $('#warning').data('warning');
+        if (warning) {
+            iziToast.warning({
+                title: 'Warning !',
+                message: warning,
+                position: 'topRight'
+            });
+        }
         <?php if ($this->uri->segment(2) == 'register') { ?>
             iziToast.info({
                 title: 'Information !',
-                message: 'Pastikan anda terkoneksi dengan internet saat melakukan registrasi !, \n Dikarenakan kami akan mengirimkan kode aktivasi ke email anda !',
+                message: 'Pastikan anda terkoneksi dengan internet saat melakukan registrasi !, Dikarenakan kami akan mengirimkan kode aktivasi ke email anda !',
                 position: 'topCenter',
                 timeout: 0
             });

@@ -224,6 +224,7 @@ class Auth extends CI_Controller
     {
         $params = array('user_id', 'role_id');
         $this->session->unset_userdata($params);
+        $this->session->set_flashdata('warning', "Anda telah berhasil logout, login untuk kembali !");
         redirect('auth');
     }
 }

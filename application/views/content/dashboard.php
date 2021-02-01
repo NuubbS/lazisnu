@@ -191,7 +191,7 @@
 						<div class="col-lg-6">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="d-inline">User baru belum melakukan aktivasi</h4>
+									<h4 class="d-inline">User baru-baru ini mendaftar !</h4>
 									<div class="card-header-action">
 										<a href="#" class="btn btn-primary">View Detail</a>
 									</div>
@@ -202,7 +202,11 @@
 											<li class="media">
 												<img class="mr-3 rounded-circle" width="50" src="<?= base_url(); ?>assets/img/avatar/<?= $data->gambar; ?>" alt="avatar">
 												<div class="media-body">
-													<div class="badge badge-pill badge-danger mb-1 float-right"><?= $data->status; ?></div>
+													<?php if ($data->status_id == 2) { ?>
+														<div class="badge badge-pill badge-danger mb-1 float-right"><?= $data->status; ?></div>
+													<?php } else { ?>
+														<div class="badge badge-pill badge-success mb-1 float-right"><?= $data->status; ?></div>
+													<?php } ?>
 													<h6 class="media-title"><a href="#"><?= $data->nama; ?></a></h6>
 													<div class="text-small text-muted"><?= $data->role; ?><div class="bullet"></div> <span class="text-primary"><?= $data->date_created; ?></span></div>
 												</div>

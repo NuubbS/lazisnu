@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/datatables.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/plugins/animate.min.css') ?>">
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/jqvmap/dist/jqvmap.min.css">
@@ -54,7 +55,7 @@
                                 <i class="fas fa-cog"></i> Settings
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="<?= base_url('auth/logout'); ?>" class="dropdown-item has-icon text-danger">
+                            <a href="#modal-logout" data-toggle="modal" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -161,6 +162,28 @@
     <script src="<?= base_url() ?>assets/js/page/components-user.js"></script>
 
     <!-- ============ Search UI End ============= -->
+    <!-- Modal -->
+    <div class="modal fade" id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="modal-logoutLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-logoutLabel">Logout Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda yakin untuk logout ?
+                </div>
+                <form id="formLogout" action="<?= site_url('auth/logout'); ?>" method="post">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Yes, Logout Now.</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
         // tooltip
         $(document).ready(function() {

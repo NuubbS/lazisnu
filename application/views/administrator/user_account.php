@@ -1,42 +1,47 @@
 <!-- Main Content -->
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
-            <h1>User Account</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Setting</a></div>
-                <div class="breadcrumb-item">User Account</div>
+        <!-- animate -->
+        <div class="animate__animated animate__bounce animate__fast">
+            <div class="section-header">
+                <h1>User Account</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="#">Setting</a></div>
+                    <div class="breadcrumb-item">User Account</div>
+                </div>
             </div>
         </div>
-
         <div class="section-body">
             <h2 class="section-title">Note</h2>
             <p class="section-lead text-dark">
                 <i>" Dengan bersedakah tidak akan membuat kita miskin ! "</i>
             </p>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card table-responsive">
-                        <div class="card-body">
-                            <table id="table_user" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Tgl dibuat</th>
-                                        <th scope="col">Tgl Diubah</th>
-                                        <th scope="col">Tools</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+            <!-- animasi table -->
+            <div class="animate__animated animate__fadeInUp animate__fast">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card table-responsive">
+                            <div class="card-body">
+                                <table id="table_user" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Role</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Tgl dibuat</th>
+                                            <th scope="col">Tgl Diubah</th>
+                                            <th scope="col">Tools</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
