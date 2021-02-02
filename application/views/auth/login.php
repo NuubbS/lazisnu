@@ -25,7 +25,7 @@
                                 <a href="<?= base_url('auth/forgot'); ?>" class="float-left mt-3">
                                     Forgot Password?
                                 </a>
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" name="login" tabindex="4">
+                                <button type="submit" class="btn btn-success btn-lg btn-icon icon-right" name="login" tabindex="4">
                                     Login
                                 </button>
                             </div>

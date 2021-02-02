@@ -34,7 +34,7 @@
     <?= $content_auth; ?>
 
     <div class="text-center mt-5 text-small">
-        Copyright &copy; 2020 - <?= date('Y'); ?><div class="bullet"></div>Created By Arief Rahman Putera & M. Hamdan Yusuf, Made with <i class="fas fa-smile text-primary"></i> by Stisla
+        Copyright &copy; 2020 - <?= date('Y'); ?><div class="bullet"></div>Created By Arief Rahman Putera & M. Hamdan Yusuf, Made with <i class="fas fa-smile text-success"></i> by Stisla
     </div>
     </div>
     </div>
