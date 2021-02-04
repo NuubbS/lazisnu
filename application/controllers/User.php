@@ -11,7 +11,7 @@ class User extends CI_Controller
 
     public function user_account()
     {
-        $data['title'] = 'User Account &mdash; Lazisnu';
+        $data['title'] = 'User Account &mdash; Lazisnu Kesamben';
         $this->template->load('template', 'administrator/user_account', $data);
     }
 
@@ -29,7 +29,7 @@ class User extends CI_Controller
         foreach ($m as $key => $value) {
             $act = '';
             $act .= sprintf('<button onclick="edit(%s)" class="btn btn-icon btn-sm btn-primary m-1" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="fas fa-user-edit"></i></button>', $value['user_id']);
-            $act .= sprintf('<button onclick="hapus(%s)" class="btn btn-icon btn-sm btn-info m-1" data-toggle="tooltip" data-placement="top" title="Detail User"><i class="fas fa-diagnoses"></button>', $value['user_id']);
+            $act .= sprintf('<button onclick="detail(%s)" class="btn btn-icon btn-sm btn-info m-1" data-toggle="tooltip" data-placement="top" title="Detail User"><i class="fas fa-diagnoses"></button>', $value['user_id']);
             $m[$key]['as'] = $act;
             $m[$key]['user_id'] = $no;
             $no++;
@@ -74,6 +74,14 @@ class User extends CI_Controller
         $this->load->view('administrator/user_update', $this->data);
     }
 
+    function user_account_detail($id)
+    {
+        $this->data['role'] = $this->main_m->view('user_role')->result();
+        $this->data['user'] = $this->main_m->view_where('user', ['user_id' => $id])->row();
+
+        $this->load->view('administrator/user_detail', $this->data);
+    }
+
     // proses update
     function user_account_update()
     {
@@ -84,15 +92,14 @@ class User extends CI_Controller
         $data = [
             "role_id" => $role_id,
             "date_updated" => date('Y-m-d H:i:s'),
-            "keterangan_id" => 1
         ];
 
         $update_user_id = $this->user_m->update_user($user_id, $data);
         if (@$update_user_id) {
-            $message['messages'] = "Berhasil Update Data Soal....";
+            $message['messages'] = "Berhasil Update Data user";
             $message['status'] = "1";
         } else {
-            $message['messages'] = "Gagal Mengeksekusi Query Soal";
+            $message['messages'] = "Gagal Update Data User";
             $message['status'] = "0";
         }
         echo json_encode($message);

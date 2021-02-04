@@ -6,7 +6,7 @@ class Profile extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Profile &mdash; Lazisnu';
+        $data['title'] = 'Profile &mdash; Lazisnu Kesamben';
         $this->template->load('template', 'content/profile', $data);
     }
 }

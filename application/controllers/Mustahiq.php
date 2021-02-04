@@ -6,7 +6,7 @@ class Mustahiq extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Mustahiq &mdash; Lazisnu';
+        $data['title'] = 'Mustahiq &mdash; Lazisnu Kesamben';
         $this->template->load('template', 'content/mustahiq', $data);
     }
 }

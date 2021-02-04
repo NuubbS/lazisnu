@@ -50,10 +50,10 @@
     </section>
 </div>
 
-<!-- modal tambah -->
+<!-- modal ubah -->
 <div class="modal" id="modalUserUpdate" role="dialog" data-backdrop="false" style="background: rgba(0,0,0,0.3);">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+        <div class="modal-content P-1">
             <div class="modal-header">
                 <h5 class="modal-title">Ubah Role User</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
             </div>
@@ -65,7 +65,23 @@
         </div>
     </div>
 </div>
-<!-- modal tambah -->
+<!-- modal ubah -->
+<!-- modal info -->
+<div class="modal" id="infouser" role="dialog" data-backdrop="false" style="background: rgba(0,0,0,0.3);">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content P-1">
+            <div class="modal-header">
+                <h5 class="modal-title">INFO USER</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+            <form id="form_update" action="<?= base_url('user/user_account_update'); ?>" method="post">
+                <div class="modal-body" id="content_detail">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- modal info -->
 
 <script type="text/javascript">
     var table;
@@ -94,9 +110,9 @@
 
     <?php if ($this->session->flashdata('result')) : ?>
         <?php if ($this->session->flashdata('result')['status']) : ?>
-            swal('Sukses!', '<?= $this->session->flashdata('result')['msg'] ?>', 'success');
+            Swal.fire('Sukses!', '<?= $this->session->flashdata('result')['msg'] ?>', 'success');
         <?php else : ?>
-            swal('Maaf!', '<?= $this->session->flashdata('result')['msg'] ?>', 'error');
+            Swal.fire('Maaf!', '<?= $this->session->flashdata('result')['msg'] ?>', 'error');
         <?php endif ?>
     <?php endif ?>
 
@@ -121,13 +137,13 @@
             table.ajax.reload();
             iziToast.success({
                 title: 'Success',
-                message: 'Data berhasil diubah !',
+                message: message,
                 position: 'topRight'
             });
         } else {
             iziToast.error({
                 title: 'Error',
-                message: 'Data gagal diubah !',
+                message: message,
                 position: 'topRight'
             });
         }
@@ -166,6 +182,20 @@
                 $.LoadingOverlay("hide");
                 $('#modalUserUpdate').modal('show');
                 $('#content_update').html(result);
+
+            }
+        });
+    }
+
+    function detail(id) {
+        $.LoadingOverlay("show");
+        $.ajax({
+            url: "<?= base_url("user/user_account_detail/") ?>" + id,
+            dataType: "html",
+            success: function(result) {
+                $.LoadingOverlay("hide");
+                $('#infouser').modal('show');
+                $('#content_detail').html(result);
 
             }
         });

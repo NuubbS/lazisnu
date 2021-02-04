@@ -1,64 +1,73 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+defined('BASEPATH') or exit('No direct script access allowed');
+?>
+<?php
+$ci = new CI_Controller();
+$ci = &get_instance();
+$ci->load->helper('url');
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>404 Page Not Found</title>
-<style type="text/css">
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+	<title>404 &mdash; Stisla</title>
 
-::selection { background-color: #E13300; color: white; }
-::-moz-selection { background-color: #E13300; color: white; }
+	<!-- General CSS Files -->
+	<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= base_url() ?>assets/plugins/fontawesome/css/all.min.css">
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+	<!-- CSS Libraries -->
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+	<!-- Template CSS -->
+	<link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
+	<link rel="stylesheet" href="<?= base_url() ?>assets/css/components.css">
 </head>
+
 <body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+	<div id="app">
+		<section class="section">
+			<div class="container mt-5">
+				<div class="page-error">
+					<div class="page-inner">
+						<h1>404</h1>
+						<div class="page-description">
+							The page you were looking for could not be found.
+						</div>
+						<div class="page-search">
+							<div class="mt-3">
+								<a href="<?= base_url(''); ?>" class="btn btn-icon icon-left btn-primary"><i class="fas fa-fire"></i> Back to Dashboard</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="simple-footer mt-5">
+					Copyright &copy; 2020 - <?= date('Y') ?> <div class="bullet"></div> Created By <a href="#">Arief Rahman Putera</a> & <a href="#">M. Hamdan Yusuf</a>
+				</div>
+			</div>
+		</section>
 	</div>
+
+	<!-- General JS Scripts -->
+	<script src="<?= base_url('assets/plugins/jquery/jquery-3.5.1.min.js'); ?>"></script>
+	<script src="<?= base_url(''); ?>assets/plugins/popper.js"></script>
+	<script src="<?= base_url('assets/plugins/jquery/jquery.nicescroll.min.js'); ?>"></script>
+	<script src="<?= base_url('assets/plugins/jquery/moment.js'); ?>"></script>
+	<script src="<?= base_url() ?>assets/js/stisla.js"></script>
+
+	<!-- JS Libraies -->
+
+	<!-- Template JS File -->
+	<script src="<?= base_url() ?>assets/js/scripts.js"></script>
+	<script src="<?= base_url() ?>assets/js/custom.js"></script>
+
+	<!-- Page Specific JS File -->
 </body>
+
 </html>
+<!-- 
+<div id="container">
+	<h1><?php echo $heading; ?></h1>
+	<?php echo $message; ?>
+</div> -->

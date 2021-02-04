@@ -34,14 +34,14 @@ class Auth extends CI_Controller
         if (isset($post['login'])) {
             if ($this->form_validation->run() == false) {
                 $this->session->set_flashdata('eror', "Periksa kembali username dan password anda !");
-                $data['title'] = 'Login &mdash; Lazisnu';
+                $data['title'] = 'Login &mdash; Lazisnu Kesamben';
                 $this->template_auth->load('template_auth', 'auth/login', $data);
             } else {
                 // cek email dan password
                 $this->_login();
             }
         } else {
-            $data['title'] = 'Login &mdash; Lazisnu';
+            $data['title'] = 'Login &mdash; Lazisnu Kesamben';
             $this->template_auth->load('template_auth', 'auth/login', $data);
         }
     }
@@ -75,7 +75,7 @@ class Auth extends CI_Controller
                 redirect('auth');
             }
         } else {
-            $data['title'] = 'Login &mdash; Lazisnu';
+            $data['title'] = 'Login &mdash; Lazisnu Kesamben';
             $this->template_auth->load('template_auth', 'auth/login', $data);
         }
     }
@@ -105,7 +105,7 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('eror', 'Ada kesalahan dalam input data, periksa kembali dengan teliti 
             !');
-            $data['title'] = 'Register &mdash; Lazisnu';
+            $data['title'] = 'Register &mdash; Lazisnu Kesamben';
             $this->template_auth->load('template_auth', 'auth/register', $data);
         } else {
             $email = $this->input->post('email', true);
@@ -140,7 +140,7 @@ class Auth extends CI_Controller
                 redirect('auth');
             } else {
                 $this->session->set_flashdata('eror', 'Ada kesalahan, periksa kembali dengan teliti !');
-                $data['title'] = 'Register &mdash; Lazisnu';
+                $data['title'] = 'Register &mdash; Lazisnu Kesamben';
                 $this->template_auth->load('template_auth', 'auth/register', $data);
             }
         }
@@ -217,7 +217,7 @@ class Auth extends CI_Controller
 
     public function forgot()
     {
-        $data['title'] = 'Forgot Password &mdash; Lazisnu';
+        $data['title'] = 'Forgot Password &mdash; Lazisnu Kesamben';
         $this->template_auth->load('template_auth', 'auth/forgot', $data);
     }
     public function logout()

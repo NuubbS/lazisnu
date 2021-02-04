@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title><?= $title; ?></title>
+    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/img/logo/favicon.png" />
     <!-- <title>Dashboard &mdash; Lazisnu</title> -->
 
     <!-- General CSS Files -->
@@ -18,11 +19,14 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/summernote/css/summernote-bs4.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/OwlCarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/OwlCarousel/dist/assets/owl.theme.default.min.css">
+    <!-- <link rel="stylesheet" src="<?= base_url() ?>assets/plugins/toast/sweetalert2.min.css"> -->
+    </link>
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/bootstrap/css/bootstrap-social.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/toast/iziToast.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/components.css">
 
 
@@ -39,36 +43,39 @@
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, <?= $this->fungsi->user_login()->nama; ?></div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="<?= base_url('profile'); ?>" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
+                    <div class="animate__animated animate__zoomIn animate__fast">
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="rounded-circle mr-1">
+                                <div class="d-sm-none d-lg-inline-block">Hi, <?= $this->fungsi->user_login()->nama; ?></div>
                             </a>
-                            <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#modal-logout" data-toggle="modal" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
-                    </li>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-title">Logged in 5 min ago</div>
+                                <a href="<?= base_url('profile'); ?>" class="dropdown-item has-icon">
+                                    <i class="far fa-user"></i> Profile
+                                </a>
+                                <a href="features-activities.html" class="dropdown-item has-icon">
+                                    <i class="fas fa-bolt"></i> Activities
+                                </a>
+                                <a href="features-settings.html" class="dropdown-item has-icon">
+                                    <i class="fas fa-cog"></i> Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#modal-logout" data-toggle="modal" class="dropdown-item has-icon text-danger">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </div>
                 </ul>
             </nav>
             <div class="main-sidebar">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="#">Lazisnu Kesamben</a>
+                        <!-- <a href="#">Lazisnu Kesamben</a> -->
+                        <img src="<?= base_url() ?>assets/img/logo/nucare.png" class="logo-lazisnu">
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="#">LK</a>
+                        <a href="#">NU</a>
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
@@ -97,6 +104,12 @@
                                 <span>Profile</span>
                             </a>
                         </li>
+                        <li class="<?= $this->uri->segment(1) == 'tutorial' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= base_url('tutorial'); ?>">
+                                <i class="fas fa-pencil-ruler"></i>
+                                <span>tutorial</span>
+                            </a>
+                        </li>
                         <!-- admin menu -->
                         <?php if ($this->session->userdata('role_id') != 3) { ?>
                             <li class="menu-header">Setting</li>
@@ -110,7 +123,7 @@
                     </ul>
                     <!-- sidebar menu -->
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                        <a href="https://github.com/NuubbS/lazisnu" class="btn btn-success btn-lg btn-block btn-icon-split">
+                        <a href="https://github.com/NuubbS/lazisnu" target="_blank" class="btn btn-success btn-lg btn-block btn-icon-split">
                             <i class="fab fa-github"></i> View Source Code
                         </a>
                     </div>
@@ -149,6 +162,7 @@
     <script src="<?= base_url() ?>assets/plugins/summernote/js/summernote-bs4.js"></script>
     <script src="<?= base_url() ?>assets/plugins/Chocolat/dist/js/chocolat.js"></script>
     <script src="<?= base_url() ?>assets/plugins/toast/iziToast.min.js"></script>
+    <script src="<?= base_url() ?>assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
 
     <!-- Template JS File -->
