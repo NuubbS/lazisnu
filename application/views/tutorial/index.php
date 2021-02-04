@@ -186,13 +186,19 @@
             iziToast.success({
                 title: 'Success',
                 message: message,
-                position: 'topRight'
+                position: 'topRight',
+                balloon: true,
+                transitionIn: 'fadeInLeft',
+                transitionOut: 'fadeOutRight'
             });
         } else {
             iziToast.error({
                 title: 'Error',
                 message: message,
-                position: 'topRight'
+                position: 'topRight',
+                balloon: true,
+                transitionIn: 'fadeInLeft',
+                transitionOut: 'fadeOutRight'
             });
         }
     }
@@ -312,14 +318,20 @@
                         iziToast.success({
                             title: 'Success!',
                             message: 'Data berhasil dihapus !',
-                            position: 'topRight'
+                            position: 'topRight',
+                            balloon: true,
+                            transitionIn: 'fadeInLeft',
+                            transitionOut: 'fadeOutRight'
                         });
                         table.ajax.reload();
                     } else {
                         iziToast.error({
                             title: 'Error!',
                             message: 'Data gagal dihapus',
-                            position: 'topRight'
+                            position: 'topRight',
+                            balloon: true,
+                            transitionIn: 'fadeInLeft',
+                            transitionOut: 'fadeOutRight'
                         });
                         table.ajax.reload();
                     }
