@@ -4,11 +4,11 @@
         <!-- animate -->
         <div class="animate__animated animate__bounce animate__fast">
             <div class="section-header">
-                <h1>User Account</h1>
+                <h1>User Account CRUD</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Setting</a></div>
-                    <div class="breadcrumb-item">User Account</div>
+                    <div class="breadcrumb-item">User Account CRUD</div>
                 </div>
             </div>
         </div>
@@ -44,6 +44,10 @@
 
                                     </tbody>
                                 </table>
+                                <i class="fas fa-quote-left fa-2x fa-pull-left"></i>
+                                Gatsby believed in the green light, the orgastic future that year by year recedes before us.
+                                It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
+                                And one fine morning — So we beat on, boats against the current, borne back ceaselessly into the past.
                             </div>
                         </div>
                     </div>
@@ -204,7 +208,10 @@
     }
 
     function saveData() {
-        $.LoadingOverlay("show");
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
         var form = $('#form_add');
         $.ajax({
             type: "POST",
@@ -247,13 +254,19 @@
     }
 
     function tambah() {
-        $.LoadingOverlay("show");
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
         $('#modalUserAdd').modal('show');
         $.LoadingOverlay("hide");
     }
 
     function edit(id) {
-        $.LoadingOverlay("show");
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
         $.ajax({
             url: "<?= base_url("tutorial/crud_edit/") ?>" + id,
             dataType: "html",
@@ -267,7 +280,10 @@
     }
 
     function detail(id) {
-        $.LoadingOverlay("show");
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
         $.ajax({
             url: "<?= base_url("tutorial/user_account_detail/") ?>" + id,
             dataType: "html",
@@ -281,7 +297,10 @@
     }
 
     function updateData() {
-        $.LoadingOverlay("show");
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
         var form = $('#form_update');
         $.ajax({
             type: "POST",
@@ -309,7 +328,10 @@
             cancelButtonText: 'Batal hapus'
         }).then((result) => {
             if (result.value) {
-                $.LoadingOverlay("show");
+                $.LoadingOverlay("show", {
+                    image: "",
+                    fontawesome: "fa fa-spinner fa-pulse"
+                });
                 $.post('<?= base_url('tutorial/crud_hapus') ?>', {
                     'id': id
                 }, function(data, textStatus, xhr) {

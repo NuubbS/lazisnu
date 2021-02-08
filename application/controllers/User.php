@@ -7,6 +7,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('main_m');
+        check_unlogin();
     }
 
     public function user_account()
@@ -91,6 +92,32 @@ class User extends CI_Controller
 
         $data = [
             "role_id" => $role_id,
+            "date_updated" => date('Y-m-d H:i:s'),
+        ];
+
+        $update_user_id = $this->user_m->update_user($user_id, $data);
+        if (@$update_user_id) {
+            $message['messages'] = "Berhasil Update Data user";
+            $message['status'] = "1";
+        } else {
+            $message['messages'] = "Gagal Update Data User";
+            $message['status'] = "0";
+        }
+        echo json_encode($message);
+    }
+
+    function user_profile_update()
+    {
+        //table soal
+        $user_id = $this->input->post('user_id');
+        $nama = $this->input->post('nama');
+        $alamat = $this->input->post('alamat');
+        $no_hp = $this->input->post('no_hp');
+
+        $data = [
+            "nama" => $nama,
+            "alamat" => $alamat,
+            "no_hp" => $no_hp,
             "date_updated" => date('Y-m-d H:i:s'),
         ];
 

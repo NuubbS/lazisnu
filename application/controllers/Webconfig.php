@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Profile extends CI_Controller
+class Webconfig extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -13,7 +12,7 @@ class Profile extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Profile &mdash; Lazisnu Kesamben';
-        $this->template->load('template', 'content/profile', $data);
+        $data['title'] = 'Webconfig &mdash; Lazisnu Kesamben';
+        $this->template->load('template', 'administrator/webconfig', $data);
     }
 }

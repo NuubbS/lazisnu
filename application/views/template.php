@@ -29,10 +29,43 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/custom.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/components.css">
 
+    <!-- General JS Scripts -->
+    <script src="<?= base_url('assets/plugins/jquery/jquery-3.5.1.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/loading-overlay/loadingoverlay.min.js') ?>"></script>
+    <script src="<?= base_url(''); ?>assets/plugins/popper.js"></script>
+    <script src="<?= base_url(''); ?>assets/plugins/tooltip.js"></script>
 
+    <style type="text/css">
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #fff;
+        }
+
+        .preloader .loading {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font: 14px arial;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- loader -->
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/img/loader/loader.gif'); ?>" width="80">
+            <p>Harap Tunggu</p>
+        </div>
+    </div>
+    <!-- loader -->
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
@@ -85,6 +118,12 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link" target="_blank" href="<?= base_url('dashboard') ?>">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>View Website</span>
+                            </a>
+                        </li>
                         <li class="menu-header">Content</li>
                         <li class="nav-item dropdown <?= $this->uri->segment(1) == "munfiq" || $this->uri->segment(1) == "mustahiq" ? 'active' : '' ?>">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-hand-holding-usd"></i>
@@ -104,15 +143,28 @@
                                 <span>Profile</span>
                             </a>
                         </li>
-                        <li class="<?= $this->uri->segment(1) == 'tutorial' ? 'active' : '' ?>">
-                            <a class="nav-link" href="<?= base_url('tutorial'); ?>">
+                        <li class="menu-header">Tutorial</li>
+                        <li class="<?= $this->uri->segment(2) == 'crud' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= base_url('tutorial/crud'); ?>">
                                 <i class="fas fa-pencil-ruler"></i>
-                                <span>tutorial</span>
+                                <span>CRUD</span>
+                            </a>
+                        </li>
+                        <li class="<?= $this->uri->segment(2) == 'chart' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= base_url('tutorial/chart'); ?>">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Grafik</span>
                             </a>
                         </li>
                         <!-- admin menu -->
                         <?php if ($this->session->userdata('role_id') != 3) { ?>
-                            <li class="menu-header">Setting</li>
+                            <li class="menu-header">Settings</li>
+                            <li class="<?= $this->uri->segment(1) == 'webconfig' ? 'active' : '' ?>">
+                                <a class="nav-link" href="<?= base_url('webconfig'); ?>">
+                                    <i class="fas fa-tools"></i>
+                                    <span>Website Management</span>
+                                </a>
+                            </li>
                             <li class="<?= $this->uri->segment(1) == 'user' ? 'active' : '' ?>">
                                 <a class="nav-link" href="<?= base_url('user/user_account'); ?>">
                                     <i class="fas fa-users-cog"></i>
@@ -130,13 +182,9 @@
                 </aside>
             </div>
 
-            <!-- General JS Scripts -->
-            <script src="<?= base_url('assets/plugins/jquery/jquery-3.5.1.min.js'); ?>"></script>
-            <script src="<?= base_url('assets/js/datatables.min.js') ?>"></script>
-            <script src="<?= base_url('assets/plugins/loading-overlay/loadingoverlay.min.js') ?>"></script>
-            <script src="<?= base_url(''); ?>assets/plugins/popper.js"></script>
-            <script src="<?= base_url(''); ?>assets/plugins/tooltip.js"></script>
+            <!-- untuk contents -->
             <?= $contents; ?>
+            <!-- untuk contents -->
 
             <footer class="main-footer">
                 <div class="footer-left">
@@ -204,6 +252,7 @@
             $("body").tooltip({
                 selector: '[data-toggle=tooltip]'
             });
+            $(".preloader").fadeOut();
         });
     </script>
 </body>

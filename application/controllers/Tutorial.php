@@ -7,15 +7,23 @@ class Tutorial extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('usercrud_m');
+        check_unlogin();
+        $this->load->model(['usercrud_m', 'chart_m']);
     }
 
-    public function index()
+    public function crud()
     {
         $data['status'] = $this->db->get('status')->result();
         $data['role'] = $this->db->get('user_role')->result();
-        $data['title'] = 'Tutorial &mdash; Lazisnu Kesamben';
+        $data['title'] = 'Tutorial CRUD &mdash; Lazisnu Kesamben';
         $this->template->load('template', 'tutorial/index', $data);
+    }
+
+    public function chart()
+    {
+        $data['title'] = 'Tutorial Chart &mdash; Lazisnu Kesamben';
+        $data['user'] = $this->user(true); //untuk meload fungsi user
+        $this->template->load('template', 'tutorial/chart', $data);
     }
 
     function crud_fetch()
@@ -140,5 +148,21 @@ class Tutorial extends CI_Controller
         } else {
             echo json_encode(false);
         }
+    }
+
+    // fungsi grafik jumlah user
+    public function user()
+    {
+        $row = [];
+        $user = $this->chart_m->user();
+        $grafik['label_user'] = array_column($user, 'bulan');
+        $grafik['series_user'] = array_column($user, 'jumlah');
+        $grafik['nama_user'] = 'Jumlah User';
+        $grafik['min_user'] =  0;
+        $grafik['max_user'] =   ($grafik['series_user'] != NULL) ? max($grafik['series_user']) : 0;
+        $grafik['interval_user'] = ($grafik['series_user'] != NULL) ? ceil(max($grafik['series_user']) / 10) : 0;
+        $data = ['row' => $row, 'grafik' => $grafik, 'md' => @(12 / sizeof($row))];
+        return $data;
+        // var_dump($data);
     }
 }

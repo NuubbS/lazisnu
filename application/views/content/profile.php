@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Hi, Ujang!</h2>
+            <h2 class="section-title">Hi, <?= $this->fungsi->user_login()->nama; ?></h2>
             <p class="section-lead">
                 Change information about yourself on this page.
             </p>
@@ -18,7 +18,7 @@
                 <div class="col-12 col-md-12 col-lg-5">
                     <div class="card profile-widget">
                         <div class="profile-widget-header">
-                            <img alt="image" src="http://localhost/stisla-codeigniter/assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                            <img alt="image" src="<?= base_url() ?>assets/img/avatar/<?= $this->fungsi->user_login()->gambar; ?>" class="rounded-circle profile-widget-picture">
                             <div class="profile-widget-items">
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Posts</div>
@@ -35,15 +35,15 @@
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <div class="font-weight-bold mb-2">Follow Ujang On</div>
+                            <div class="font-weight-bold mb-2">Follow Lazisnu Kesamben On</div>
                             <a href="#" class="btn btn-social-icon btn-facebook mr-1">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" class="btn btn-social-icon btn-twitter mr-1">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="btn btn-social-icon btn-github mr-1">
-                                <i class="fab fa-github"></i>
+                            <a href="#" class="btn btn-social-icon btn-pinterest mr-1">
+                                <i class="fab fa-youtube"></i>
                             </a>
                             <a href="#" class="btn btn-social-icon btn-instagram">
                                 <i class="fab fa-instagram"></i>
@@ -53,41 +53,33 @@
                 </div>
                 <div class="col-12 col-md-12 col-lg-7">
                     <div class="card">
-                        <form method="post" class="needs-validation" novalidate="">
+                        <form id="form_updated" method="post" action="<?= base_url('user/user_profile_update'); ?>">
                             <div class="card-header">
                                 <h4>Edit Profile</h4>
                             </div>
                             <div class="card-body">
+                                <input type="hidden" name="user_id" value="<?= $this->fungsi->user_login()->user_id ?>">
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control" value="Ujang" required="">
-                                        <div class="invalid-feedback">
-                                            Please fill in the first name
-                                        </div>
+                                        <label>Nama Lengkap</label>
+                                        <input type="text" name="nama" class="form-control" value="<?= $this->fungsi->user_login()->nama; ?>" required="">
                                     </div>
                                     <div class="form-group col-md-6 col-12">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control" value="Maman" required="">
-                                        <div class="invalid-feedback">
-                                            Please fill in the last name
-                                        </div>
+                                        <label>Email</label>
+                                        <input type="email" name="email" class="form-control" value="<?= $this->fungsi->user_login()->email; ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-7 col-12">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" value="ujang@maman.com" required="">
-                                        <div class="invalid-feedback">
-                                            Please fill in the email
-                                        </div>
+                                        <label>Alamat</label>
+                                        <input type="Alamat" name="alamat" class="form-control" value="<?= $this->fungsi->user_login()->alamat; ?>" required="">
                                     </div>
                                     <div class="form-group col-md-5 col-12">
                                         <label>Phone</label>
-                                        <input type="tel" class="form-control" value="">
+                                        <input type="number" name="no_hp" class="form-control" value="<?= $this->fungsi->user_login()->no_hp; ?>">
                                     </div>
                                     <div class="card-footer text-right ml-auto">
-                                        <button class="btn btn-primary">Save Changes</button>
+                                        <button class="btn btn-primary" onclick="saveData();">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -98,3 +90,49 @@
         </div>
     </section>
 </div>
+
+<script>
+    function saveData() {
+        $.LoadingOverlay("show", {
+            image: "",
+            fontawesome: "fa fa-spinner fa-pulse"
+        });
+        var form = $('#form_updated');
+        $.ajax({
+            type: "POST",
+            url: form.attr('action'),
+            data: form.serialize(),
+            dataType: "json",
+            success: function(result) {
+                message = result.messages;
+                status = result.status;
+                notifikasi(status, message);
+            }
+        });
+
+    }
+
+    function notifikasi(status, message) {
+        $.LoadingOverlay("hide");
+        if (status == 1) {
+            table.ajax.reload();
+            iziToast.success({
+                title: 'Success',
+                message: message,
+                position: 'topRight',
+                balloon: true,
+                transitionIn: 'fadeInLeft',
+                transitionOut: 'fadeOutRight'
+            });
+        } else {
+            iziToast.error({
+                title: 'Error',
+                message: message,
+                position: 'topRight',
+                balloon: true,
+                transitionIn: 'fadeInLeft',
+                transitionOut: 'fadeOutRight'
+            });
+        }
+    }
+</script>

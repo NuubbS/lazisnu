@@ -8,14 +8,14 @@
 						<div class="carousel-inner">
 							<div class="carousel-item active">
 								<div class="row">
-									<div class="col-lg-6 col-md-12 col-sm-12">
+									<div class="col-lg-4 col-md-12 col-sm-12">
 										<div class="card card-statistic-1">
 											<div class="card-icon bg-primary">
 												<i class="fas fa-users"></i>
 											</div>
 											<div class="card-wrap">
 												<div class="card-header">
-													<h4>MUSTAHIQ</h4>
+													<h4>Penerima Manfaat</h4>
 												</div>
 												<div class="card-body">
 													10
@@ -23,14 +23,29 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-12 col-sm-12">
+									<div class="col-lg-4 col-md-12 col-sm-12">
 										<div class="card card-statistic-1">
 											<div class="card-icon bg-info">
 												<i class="fas fa-donate"></i>
 											</div>
 											<div class="card-wrap">
 												<div class="card-header">
-													<h4>MUNFIQ</h4>
+													<h4>Donatur</h4>
+												</div>
+												<div class="card-body">
+													100
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-12 col-sm-12">
+										<div class="card card-statistic-1">
+											<div class="card-icon bg-danger">
+												<i class="fas fa-user-shield"></i>
+											</div>
+											<div class="card-wrap">
+												<div class="card-header">
+													<h4>Users Account</h4>
 												</div>
 												<div class="card-body">
 													100
