@@ -4,7 +4,7 @@
         <!-- animate -->
         <div class="animate__animated animate__bounce animate__fast">
             <div class="section-header">
-                <h1>User Account CRUD</h1>
+                <h1>Modal</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Setting</a></div>
@@ -15,7 +15,7 @@
         <div class="section-body">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                Launch static backdrop modal
+                Four In One
             </button>
         </div>
     </section>
