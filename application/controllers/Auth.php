@@ -192,8 +192,8 @@ class Auth extends CI_Controller
             $user_token =
                 $this->db->get_where('token', ['token' => $token])->row_array();
             if ($user_token) {
-                // if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
-                if (time() - $user_token['date_created'] < (60 * 60 * 1)) {
+                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                    // if (time() - $user_token['date_created'] < (60 * 60 * 1)) {
                     $this->db->set('status_id', 1);
                     $this->db->where('email', $email);
                     $this->db->update('user');
@@ -204,15 +204,15 @@ class Auth extends CI_Controller
                 } else {
                     $this->db->delete('user', ['email' => $email]);
                     $this->db->delete('token', ['email' => $email]);
-                    $this->session->set_flashdata('eror', "Account activation failed");
+                    $this->session->set_flashdata('eror', "Token sudah Kadaluardsa silahkan registrasi ulang");
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('eror', "Account activation failed");
+                $this->session->set_flashdata('eror', "Token Account activation invalid");
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('eror', "Account activation failed");
+            $this->session->set_flashdata('eror', "Email account activation invalidd");
             redirect('auth');
         }
     }
