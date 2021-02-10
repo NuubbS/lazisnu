@@ -73,7 +73,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">INFO USER</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
             </div>
-            <form id="form_update" action="<?= base_url('user/user_account_update'); ?>" method="post">
+            <form id="form_detail" action="<?= base_url('user/user_account_update'); ?>" method="post">
                 <div class="modal-body" id="content_detail">
 
                 </div>

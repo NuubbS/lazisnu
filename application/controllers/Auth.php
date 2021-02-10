@@ -114,10 +114,10 @@ class Auth extends CI_Controller
                 'email' => htmlspecialchars($email),
                 'gambar' => 'default_user.png',
                 'password' => sha1($this->input->post('password')),
+                'alamat' => '-',
+                'no_hp' => '-',
                 'role_id' => 3, //default member
-                'status_id' => 0, //default off
-                'keterangan_id' => 1
-
+                'status_id' => 2, //default off
             ];
 
             // token untuk aktivasi
@@ -129,7 +129,8 @@ class Auth extends CI_Controller
             ];
 
             // proses add data
-            $this->user_m->add_user($data);
+            // $this->user_m->add_user($data);
+            $this->db->insert('user', $data);
             $this->db->insert('token', $user_token);
 
             // kirim token ke email pendaftar

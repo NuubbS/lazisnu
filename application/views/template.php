@@ -32,7 +32,7 @@
     <!-- General JS Scripts -->
     <script src="<?= base_url('assets/plugins/jquery/jquery-3.5.1.min.js'); ?>"></script>
     <script src="<?= base_url('assets/js/datatables.min.js') ?>"></script>
-    <script src="<?= base_url('assets/plugins/loading-overlay/loadingoverlay.min.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/loading-overlay/loadingoverlay.js') ?>"></script>
     <script src="<?= base_url(''); ?>assets/plugins/popper.js"></script>
     <script src="<?= base_url(''); ?>assets/plugins/tooltip.js"></script>
 

@@ -19,12 +19,12 @@ class User extends CI_Controller
     function user_account_fetch()
     {
         $this->datatables->search('user.user_id, user.nama, user.email, user_role.role, user.nama, status.status, user.date_created, user.date_updated, user.user_id');
-        $this->datatables->select('user.user_id, user.nama, user.email, user_role.role, user.nama, status.status, user.date_created, user.date_updated, user.user_id as as');
+        $this->datatables->select('user.user_id, user.nama, user.email, user_role.role, user.nama, status.status, user.date_created, user.date_updated');
         $this->datatables->from('user');
         $this->datatables->join('user_role', 'user.role_id = user_role.role_id');
         $this->datatables->join('status', 'user.status_id = status.status_id');
         $this->datatables->where_in('user.status_id', ['1', '2']);
-        $this->datatables->order_by('role', "DESC");
+        // $this->datatables->order_by('user.nama', "DESC");
         $m = $this->datatables->get();
         $no = 1;
         foreach ($m as $key => $value) {
