@@ -156,6 +156,12 @@
                                 <span>Grafik</span>
                             </a>
                         </li>
+                        <li class="<?= $this->uri->segment(2) == 'modal' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= base_url('tutorial/modal'); ?>">
+                                <i class="fas fa-tv"></i>
+                                <span>Modal Tabs</span>
+                            </a>
+                        </li>
                         <!-- admin menu -->
                         <?php if ($this->session->userdata('role_id') != 3) { ?>
                             <li class="menu-header">Settings</li>

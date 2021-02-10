@@ -59,8 +59,8 @@ class Auth extends CI_Controller
             if ($query->num_rows() > 0) {
                 $row = $query->row();
                 // cek aktifasi user
-                if ($row->status_id == 0) {
-                    $this->session->set_flashdata('eror', 'Akun belum melakukan aktifasi pada akun anda! \n Silahkan melaukan aktifasi dengan tautan yang sudah kami kirim ke email anda! ');
+                if ($row->status_id == 2) {
+                    $this->session->set_flashdata('eror', 'Akun belum melakukan aktivasi pada akun anda! Silahkan melaukan aktivasi dengan klik tautan yang sudah kami kirimkan ke alamat email anda! ');
                     redirect('auth');
                 } else {
                     $params = array(
@@ -153,8 +153,8 @@ class Auth extends CI_Controller
         $config = [
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'dancokbeud@gmail.com',
-            'smtp_pass' => 'dancokbeud123',
+            'smtp_user' => 'kesambenlazisnu@gmail.com',
+            'smtp_pass' => 'KESAMBENLAZISNU66191',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -164,7 +164,7 @@ class Auth extends CI_Controller
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
-        $this->email->from('dancokbeud@gmail.com', 'Lazisnu Kesamben');
+        $this->email->from('kesambenlazisnu@gmail.com', 'Lazisnu Kesamben');
 
         // untuk verivikasi
         if ($type == 'aktivasi') {
@@ -192,7 +192,8 @@ class Auth extends CI_Controller
             $user_token =
                 $this->db->get_where('token', ['token' => $token])->row_array();
             if ($user_token) {
-                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                // if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                if (time() - $user_token['date_created'] < (60 * 60 * 1)) {
                     $this->db->set('status_id', 1);
                     $this->db->where('email', $email);
                     $this->db->update('user');

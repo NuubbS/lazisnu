@@ -87,6 +87,14 @@
                 position: 'topRight'
             });
         }
+        var sukses = $('#sukses').data('sr');
+        if (sukses) {
+            iziToast.success({
+                title: 'sukses !',
+                message: sukses,
+                position: 'topRight'
+            });
+        }
         <?php if ($this->uri->segment(2) == 'register') { ?>
             iziToast.info({
                 title: 'Information !',

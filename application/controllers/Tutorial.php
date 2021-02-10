@@ -26,6 +26,12 @@ class Tutorial extends CI_Controller
         $this->template->load('template', 'tutorial/chart', $data);
     }
 
+    public function modal()
+    {
+        $data['title'] = 'Tutorial modal &mdash; Lazisnu Kesamben';
+        $this->template->load('template', 'tutorial/modal', $data);
+    }
+
     function crud_fetch()
     {
         $this->datatables->search('user_crud.user_id, user_crud.nama, user_crud.email,user_crud.alamat,user_crud.no_hp, user_role.role, user_crud.nama, status.status, user_crud.date_created, user_crud.date_updated, user_crud.user_id');
