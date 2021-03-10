@@ -192,7 +192,7 @@ class Auth extends CI_Controller
             $user_token =
                 $this->db->get_where('token', ['token' => $token])->row_array();
             if ($user_token) {
-                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                if (time() - $user_token['date_created'] < (60 * 60 * 24)) { //user akan terhaapus
                     // if (time() - $user_token['date_created'] < (60 * 60 * 1)) {
                     $this->db->set('status_id', 1);
                     $this->db->where('email', $email);
